@@ -1,4 +1,7 @@
+'use client';
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { JalingoMap } from "@/components/jalingo-map";
 
 const WARDS = [
@@ -102,6 +105,18 @@ function Star({ className = "size-4" }: { className?: string }) {
 }
 
 export default function Home() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % FEATURES.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const currentSlide = FEATURES[activeSlide];
+
   return (
     <div className="bg-white text-gray-900 dark:bg-[#0a0b12] dark:text-gray-100">
       {/* Top bar */}
@@ -118,6 +133,7 @@ export default function Home() {
           </a>
           <nav className="hidden items-center gap-7 text-sm font-medium text-gray-600 lg:flex dark:text-gray-300">
             <a href="#capital" className="hover:text-indigo-700 dark:hover:text-indigo-400">The Capital</a>
+            <a href="#map" className="hover:text-indigo-700 dark:hover:text-indigo-400">Map</a>
             <a href="#directorates" className="hover:text-indigo-700 dark:hover:text-indigo-400">Directorates</a>
             <a href="#wards" className="hover:text-indigo-700 dark:hover:text-indigo-400">Wards</a>
             <a href="#projects" className="hover:text-indigo-700 dark:hover:text-indigo-400">Projects</a>
@@ -129,10 +145,19 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero — full-bleed split: indigo panel + map panel */}
-      <section id="top" className="grid lg:grid-cols-2">
-        <div className="bg-indigo-800 px-5 py-16 text-white sm:px-10 sm:py-24 lg:pl-[max(2.5rem,calc((100vw-80rem)/2+2.5rem))]">
-          <div className="mx-auto max-w-xl lg:mx-0">
+      {/* Hero — full-bleed carousel with image background and overlay */}
+      <section id="top" className="relative overflow-hidden text-white">
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+            style={{ backgroundImage: `url(${currentSlide.img})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-950/90 via-indigo-900/75 to-indigo-800/45" />
+          <div className="absolute inset-0 bg-black/25" />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-5 py-16 sm:px-10 sm:py-24">
+          <div className="max-w-xl lg:pl-[max(2.5rem,calc((100vw-80rem)/2+2.5rem))]">
             <span className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide text-indigo-950">
               <Star className="size-3.5" /> Capital of Taraba State
             </span>
@@ -142,11 +167,11 @@ export default function Home() {
                 Local Government Area
               </span>
             </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-indigo-100/85">
-              The capital city council — serving residents across the wards of
-              Jalingo with civic services, urban infrastructure and grassroots
-              governance at the centre of Taraba State.
+
+            <p className="mt-6 max-w-2xl text-sm font-semibold leading-relaxed text-white sm:text-base lg:text-lg">
+              {currentSlide.body}
             </p>
+
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#directorates" className="rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-indigo-950 transition hover:bg-amber-300 focus:ring focus:ring-amber-200">
                 Council services
@@ -155,12 +180,38 @@ export default function Home() {
                 About the city
               </a>
             </div>
+
+            <div className="mt-8 flex items-center gap-2 rounded-full bg-slate-950/30 px-4 py-2 backdrop-blur-sm">
+              {FEATURES.map((feature, index) => (
+                <button
+                  key={feature.title}
+                  type="button"
+                  aria-label={`Show slide ${index + 1}`}
+                  onClick={() => setActiveSlide(index)}
+                  className={`h-2.5 rounded-full transition-all ${
+                    activeSlide === index ? "w-8 bg-amber-400" : "w-2.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="flex items-center justify-center bg-gray-50 px-5 py-12 sm:px-10 dark:bg-[#101223]">
-          <div className="w-full max-w-lg">
-            <JalingoMap />
+      <section id="map" className="border-y border-gray-200 bg-gray-50 dark:border-white/10 dark:bg-[#101223]">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-10 sm:py-24">
+          <div className="max-w-2xl">
+            <Eyebrow>Location</Eyebrow>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Jalingo LGA on the map</h2>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+              The capital of Taraba State sits at the heart of the broader regional landscape, with the council area highlighted for quick orientation.
+            </p>
+          </div>
+
+          <div className="mt-10 rounded-[28px] border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-[#0a0b12] sm:p-8">
+            <div className="mx-auto max-w-4xl">
+              <JalingoMap />
+            </div>
           </div>
         </div>
       </section>
