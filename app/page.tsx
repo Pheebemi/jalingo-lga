@@ -328,9 +328,9 @@ export default function Home() {
             {/* Chairman portrait.
                 To add the photo: drop the file in public/ (e.g. public/chairman.jpg)
                 and replace the contents of this frame with:
-                <Image src="/chairman.jpg" alt="Hon. Nura Dantsoho" width={320} height={400}
+                <Image src="/chairman.jpg" alt="Hon. Nura Dantsoho" width={520} height={650}
                   className="h-full w-full rounded-2xl object-cover" /> */}
-            <div className="mx-auto aspect-4/5 w-56 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 md:mx-0 md:w-64 dark:border-white/10 dark:bg-[#101223]" />
+            <div className="mx-auto aspect-4/5 w-72 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm sm:w-80 md:mx-0 md:w-96 lg:w-[26rem] dark:border-white/10 dark:bg-[#101223]" />
 
             <div>
               <Eyebrow>Leadership</Eyebrow>
