@@ -325,16 +325,18 @@ export default function Home() {
       <section id="leadership" className="border-b border-gray-200 dark:border-white/10">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-10 sm:py-24">
           <div className="grid gap-10 md:grid-cols-[auto_1fr] md:items-center md:gap-16">
-            <div className="flex flex-col items-center gap-4 md:items-start">
-              <span className="flex size-32 items-center justify-center rounded-2xl bg-indigo-700 text-5xl font-extrabold text-amber-400">
-                JL
-              </span>
-            </div>
+            {/* Chairman portrait.
+                To add the photo: drop the file in public/ (e.g. public/chairman.jpg)
+                and replace the contents of this frame with:
+                <Image src="/chairman.jpg" alt="Hon. Nura Dantsoho" width={320} height={400}
+                  className="h-full w-full rounded-2xl object-cover" /> */}
+            <div className="mx-auto aspect-4/5 w-56 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 md:mx-0 md:w-64 dark:border-white/10 dark:bg-[#101223]" />
+
             <div>
               <Eyebrow>Leadership</Eyebrow>
-              <h2 className="mt-3 text-2xl font-bold">Office of the Executive Chairman</h2>
-              <p className="text-sm font-semibold text-indigo-700 dark:text-indigo-400">
-                Jalingo Local Government Council
+              <h2 className="mt-3 text-3xl font-bold tracking-tight">Hon. Nura Dantsoho</h2>
+              <p className="mt-1 text-sm font-semibold text-indigo-700 dark:text-indigo-400">
+                Executive Chairman, Jalingo Local Government Council
               </p>
               <blockquote className="mt-5 border-l-4 border-amber-400 pl-6">
                 <p className="max-w-2xl text-lg leading-relaxed text-gray-700 dark:text-gray-200">
