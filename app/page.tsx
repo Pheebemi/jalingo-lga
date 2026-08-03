@@ -325,12 +325,14 @@ export default function Home() {
       <section id="leadership" className="border-b border-gray-200 dark:border-white/10">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-10 sm:py-24">
           <div className="grid gap-10 md:grid-cols-[auto_1fr] md:items-center md:gap-16">
-            {/* Chairman portrait.
-                To add the photo: drop the file in public/ (e.g. public/chairman.jpg)
-                and replace the contents of this frame with:
-                <Image src="/chairman.jpg" alt="Hon. Nura Dantsoho" width={520} height={650}
-                  className="h-full w-full rounded-2xl object-cover" /> */}
-            <div className="mx-auto aspect-4/5 w-72 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm sm:w-80 md:mx-0 md:w-96 lg:w-[26rem] dark:border-white/10 dark:bg-[#101223]" />
+            <Image
+              src="/chairman.jpg"
+              alt="Hon. Nura Dantsoho"
+              width={520}
+              height={650}
+              className="mx-auto aspect-4/5 w-72 rounded-2xl object-cover shadow-sm sm:w-80 md:mx-0 md:w-96 lg:w-[26rem]"
+              priority
+            />
 
             <div>
               <Eyebrow>Leadership</Eyebrow>
