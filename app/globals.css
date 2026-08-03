@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: `dark:` utilities apply when <html> has `.dark`. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #14151a;
+
+  /* Taraba map: neutral context LGAs + Jalingo label. */
+  --map-context-fill: #eceef4;
+  --map-context-stroke: #ffffff;
+  --map-label-fill: #312e81;
+  --map-label-halo: #ffffff;
+}
+
+.dark {
+  --background: #0a0b12;
+  --foreground: #e6e7ee;
+
+  --map-context-fill: #1e2030;
+  --map-context-stroke: #0a0b12;
+  --map-label-fill: #c7d2fe;
+  --map-label-halo: #0a0b12;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Design system: Geist Sans (weights 400–900) with system fallbacks. */
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
